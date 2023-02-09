@@ -2,7 +2,10 @@
 name: AWS CI/CD
 
 on:
-    pull_request_target:
+  push:
+    branches:
+      - main
+  pull_request:
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
