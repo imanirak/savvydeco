@@ -64,9 +64,8 @@ const addToCart = async (req, res) => {
         localStorage.setItem('cart', JSON.stringify(cart));
        
 
-        
-
         res.render('carts/index',{cart});
+
     }
     catch(err){
         console.error(err);
@@ -130,7 +129,23 @@ const removeFromCart = async (req, res) => {
 
 // get the users shopping cart
 const getCart = async (req, res) => {
-
+  try {
+    const userId = localStorage.getItem('user');
+    if (!userId) {
+      return res.status(404).json({message:"User not found"});
+    }
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    if (!cart || cart.user !== userId) {
+      cart = {
+        user: userId,
+        items: [],
+      };
+    }
+    res.render('carts/index', { cart });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({message:"server error"})
+  }
 }
 
 
