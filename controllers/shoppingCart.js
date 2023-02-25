@@ -54,7 +54,6 @@ const addToCart = async (req, res) => {
             // add price func here
             
         } else {
-            console.log("EC INSIDE ELSE"+existingCartItemIndex)
             cart.items.push({
                 productId: product._id,
                 title: product.title,
@@ -115,7 +114,8 @@ const removeFromCart = async (req, res) => {
             if(existingCartItemIndex !== -1){
                 cart.items.splice(existingCartItemIndex, 1);
                 localStorage.setItem('cart', JSON.stringify(cart));
-                return res.redirect('/cart');
+
+                return res.redirect('/');
             } else {
                 return res.status(404).json({message:"Item not found in cart"});
             }
@@ -130,6 +130,7 @@ const removeFromCart = async (req, res) => {
 
 // get the users shopping cart
 const getCart = async (req, res) => {
+
 }
 
 
