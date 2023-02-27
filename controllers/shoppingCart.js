@@ -1,6 +1,5 @@
 const Products = require('../models/products');
 const User = require('../models/user');
-const ShoppingCart = require('../models/ShoppingCart');
 const LocalStorage = require('node-localstorage').LocalStorage;
 const localStorage = new LocalStorage('./scratch');
 
