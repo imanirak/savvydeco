@@ -1,52 +1,23 @@
 {
   "name": "savvydeco",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon server.js",
-    "build": "react-scripts build",
-    "prod": "cross-env NODE_ENV=production node server.js",
-    "eject": "react-scripts eject"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/imanirak/savvydeco.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/imanirak/savvydeco/issues"
-  },
-  "homepage": "https://github.com/imanirak/savvydeco#readme",
+  "main": "index.js",
+  "repository": "https://github.com/kobyrthr/savvydeco.git",
+  "author": "kobyrthr-dev <kobyrthr@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server",
+    "packages/*"
+  ],
   "dependencies": {
-    "@aws-cdk/aws-elasticbeanstalk": "^1.180.0",
-    "@aws-cdk/aws-iam": "^1.180.0",
-    "@aws-cdk/aws-lambda": "^1.191.0",
-    "@aws-cdk/aws-s3-assets": "^1.180.0",
-    "async": "^3.2.3",
-    "aws-cdk": "^2.63.2",
-    "body-parser": "^1.19.1",
-    "dotenv": "^14.3.2",
-    "ejs": "^3.1.6",
-    "express": "^4.17.2",
-    "express-session": "^1.17.3",
-    "method-override": "^3.0.0",
-    "mongodb": "^4.3.1",
-    "mongoose": "^6.1.8",
-    "mongoosejs-cli": "^1.0.7",
-    "multer": "^1.4.5-lts.1",
-    "node-localstorage": "^2.2.1",
-    "passport": "^0.6.0",
-    "passport-google-oauth": "^2.0.0",
-    "react-scripts": "^5.0.1"
+    "concurrently": "^7.6.0"
   },
-  "engines": {
-    "node": "14.16.0"
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "nodemon": "^2.0.20"
+  "scripts": {
+		"build":"yarn --cwd client build && mv ./client/build ./server/build",
+    "start-server-dev": "yarn --cwd server dev",
+    "start-client-dev": "yarn --cwd client start",
+    "dev": "concurrently --kill others --handle-input -n client,server 'npm:start-client-dev' 'npm:start-server-dev'"
   }
 }

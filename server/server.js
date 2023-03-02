@@ -12,6 +12,8 @@ const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const bodyParser = require('body-parser')
 const multer = require('multer');
 const path = require('path');
+const config = require("@savvydeco/config")
+
 
 
 /* ====== Internal Modules  ====== */
@@ -36,10 +38,10 @@ require("./config/passport");
 
 
 /* ====== Routes  ====== */
-const indexRoutes = require('./server/routes/index');
-const userRoutes = require('./server/routes/users');
-const productRoutes = require('./server/routes/products');
-const cartRoutes = require('./server/routes/carts');
+const indexRoutes = require('./routes/index');
+const userRoutes = require('./routes/users');
+const productRoutes = require('./routes/products');
+const cartRoutes = require('./routes/carts');
 
 	
 /* ====== Middleware  ====== */ 
@@ -49,7 +51,6 @@ app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use(require('cors')())
 
 
 // method override Middleware
@@ -69,7 +70,7 @@ app.use(passport.session());
 
 
 app.use('/', productRoutes);
-app.use('/', indexRoutes);
+app.use('/api', indexRoutes);
 app.use('/', userRoutes);
 app.use('/', cartRoutes);
 
@@ -96,6 +97,4 @@ let status;
 (process.env.NODE_ENV === 'production') ? status = "⚠️  PRODUCTION ⚠️ " : status = "dev 🤖" 
 
 
-app.listen(PORT, function () {
-   console.log(` *** currently in the ${status} environment *** `);
-});
+app.listen(config.PORT, ()=>{console.log(`This app is live on port ${config.PORT}`)})

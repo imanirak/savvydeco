@@ -9,10 +9,8 @@ function index(req, res) {
             if (err) {
             }
             else {
-                res.render('index', {
-                    products,
-                    user: req.user
-                })
+                res.send({
+                    products                })
 
             }
         })
