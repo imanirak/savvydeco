@@ -28,6 +28,12 @@
     <div>
       <h6><%= item.title %></h6>
       <p><%= item.quantity %></p>
+      <p><%= item.price %></p>
+      <form action="/cart/delete/<%=item.productId%>" method="DELETE">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit">Delete</button>
+      </form>
+      </form>
     </div>
     <% }); %>
 
