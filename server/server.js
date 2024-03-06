@@ -69,10 +69,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use('/', productRoutes);
+app.use('/api', productRoutes);
 app.use('/api', indexRoutes);
-app.use('/', userRoutes);
-app.use('/', cartRoutes);
+app.use('/api', userRoutes);
+app.use('/api', cartRoutes);
 
 // favicon error 
 app.get('/favicon.ico', function(req,res){
